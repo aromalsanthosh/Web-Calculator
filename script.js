@@ -133,14 +133,14 @@ numberButtons.forEach(button =>
 const op = []
 operationButtons.forEach(button => {
   button.addEventListener('click', () => {
-    if(op.length == 5){
+    if(op.length == 50){
         
         alert("Operation Limit Reached");
         compute();
         calculator.updateDisplay();
 
     }
-    if(op.length < 5){
+    if(op.length < 50){
         let opt = button.innerText;
         op.push(opt)
         console.log(op)
@@ -153,7 +153,7 @@ operationButtons.forEach(button => {
 
 equalsButton.addEventListener('click', button => {
 
-    if(op.length<6){
+    if(op.length<51){
         calculator.compute()
         calculator.updateDisplay()
     }
