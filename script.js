@@ -1,7 +1,8 @@
 class Calculator 
 {
   constructor(previousOperandTextElement, currentOperandTextElement) 
-  {
+  { 
+    this.op=[]
     this.previousOperandTextElement = previousOperandTextElement
     this.currentOperandTextElement = currentOperandTextElement
     this.clear()
@@ -41,10 +42,16 @@ class Calculator
 
   compute() 
   {
+    //const op = []
     let computation
     const prev = parseFloat(this.previousOperand)
     const current = parseFloat(this.currentOperand)
     if (isNaN(prev) || isNaN(current)) return
+    // op.push(this.operation)
+    // if(op.length >4){
+    //   alert("Operation limit exceeded");
+    // }
+    //console.log(this.operation)
     switch (this.operation) 
     {
       case '+':
@@ -123,25 +130,44 @@ numberButtons.forEach(button =>
   })
 })
 
+const op = []
 operationButtons.forEach(button => {
   button.addEventListener('click', () => {
-    calculator.chooseOperation(button.innerText)
-    calculator.updateDisplay()
+    if(op.length == 5){
+        
+        alert("Operation Limit Reached");
+        compute();
+        calculator.updateDisplay();
+
+    }
+    if(op.length < 5){
+        let opt = button.innerText;
+        op.push(opt)
+        console.log(op)
+        
+        calculator.chooseOperation(button.innerText)
+        calculator.updateDisplay()
+    }
   })
 })
 
 equalsButton.addEventListener('click', button => {
-  calculator.compute()
-  calculator.updateDisplay()
+
+    if(op.length<6){
+        calculator.compute()
+        calculator.updateDisplay()
+    }
+    
 })
 
 allClearButton.addEventListener('click', button => {
+  op.splice(0, op.length)
   calculator.clear()
   calculator.updateDisplay()
 })
 
 deleteButton.addEventListener('click', button => 
-{
-  calculator.delete()
-  calculator.updateDisplay()
+{   
+    calculator.delete()
+    calculator.updateDisplay()
 })
